@@ -6,7 +6,7 @@ module.exports = function (io) {
 		console.log('a user connected');
 
 		socket.on('chat message', function(msg){
-			console.log('chat message: ' + msg.username);
+			console.log('chat message: ' + msg.sender);
 			//io.emit('chat message', msg);
 
 			// if(msg === 'add user') {
