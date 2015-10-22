@@ -6,8 +6,8 @@ module.exports = function (io) {
 		console.log('a user connected');
 
 		socket.on('chat message', function(msg){
-			console.log('chat message: ' + msg);
-			io.emit('chat message', msg);
+			console.log('chat message: ' + msg.username);
+			//io.emit('chat message', msg);
 
 			// if(msg === 'add user') {
 
@@ -19,7 +19,7 @@ module.exports = function (io) {
 			//     });
 			// }
 
-		});	
+		});
 
 		socket.on('from server', function(msg){
 			console.log('from server: ' + msg);
