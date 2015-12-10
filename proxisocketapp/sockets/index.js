@@ -19,7 +19,7 @@ module.exports = function (io) {
 		socket.on('chat message', function(msg){
 			//console.log('chat message: ' + msg.sender);
 			console.log('message: ' + msg );
-			io.emit('chat message', msg);		
+			//io.emit('chat message', msg);		
 
 			// if(msg === 'add user') {
 
@@ -34,7 +34,7 @@ module.exports = function (io) {
 			// for (var i in users) {
 			// 	console.log("user " + msg +": " + users[i]);
 			// }
-			console.log(users);
+			//console.log(users);
 			// if(users.size > 0)
 		});
 
