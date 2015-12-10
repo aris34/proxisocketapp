@@ -39,7 +39,7 @@ module.exports = function (io) {
 		});
 
 		socket.on('f2fInit', function(msg){
-			console.log('f2fInit: ' + msg );
+			console.log('f2fInit: ' + msg.type );
 			io.emit('f2fInit', msg);
 		});
 
