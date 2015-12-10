@@ -38,9 +38,14 @@ module.exports = function (io) {
 			// if(users.size > 0)
 		});
 
-		socket.on('f2fInit', function(msg){
-			console.log('f2fInit: ' + msg.type );
-			io.emit('f2fInit', msg);
+		socket.on('face2face', function(msg){
+			console.log('face2face type: ' + msg.type );
+
+			if(msg.type == 'f2fInit') {
+				io.emit('face2face', msg);
+			}
+
+			
 		});
 
 		socket.on('from server', function(msg){
