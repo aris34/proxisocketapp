@@ -47,6 +47,9 @@ module.exports = function (io) {
 			else if(msg.type == 'f2fStart') {
 				io.emit('face2face', msg);
 			}
+			else if(msg.type == 'f2fEnd') {
+				io.emit('face2face', msg);
+			}
 
 			
 		});
