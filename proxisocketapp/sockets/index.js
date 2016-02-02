@@ -19,7 +19,7 @@ module.exports = function (io) {
 		socket.on('chat message', function(msg){
 			//console.log('chat message: ' + msg.sender);
 			console.log('message: ' + msg );
-			io.emit('chat message', msg.text);		
+			io.emit('chat message', msg);		
 
 			// if(msg === 'add user') {
 
