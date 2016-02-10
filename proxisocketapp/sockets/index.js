@@ -7,7 +7,7 @@ module.exports = function (io) {
 		console.log('a user connected ' + socket.id);
 
 		socket.on('connect message', function(msg){
-			console.log('user connected: ' + msg.username + ', ' + msg.id);
+			console.log('user connected: ' + msg.username + ', ' + msg.id + ' - ' + Date.now());
 
 			// When a client is connected, add the client to the users list,
 			if(users[msg.id] == null) {
@@ -48,8 +48,8 @@ module.exports = function (io) {
 		});
 
 		socket.on('face2face', function(msg){
-			console.log('face2face type: ' + msg.type );
-			console.log('face2face type: ' + msg.recipient );
+			console.log('face2face type: ' + msg.type + ' - ' + Date.now());
+			console.log('face2face recipient: ' + msg.recipient );
 
 			// Check if the target user is in the list of connected users
 			if(users[msg.recipient] == null) {
@@ -83,7 +83,7 @@ module.exports = function (io) {
 		});
 
 		socket.on('disconnect', function(){
-			console.log('user disconnected ' + socket.id);
+			console.log('user disconnected ' + socket.id + ' - ' + Date.now());
 			for(var i in users){
 				console.log('user ' + i + ': ' + users[i]);
 				if(users[i] == socket.id) {
