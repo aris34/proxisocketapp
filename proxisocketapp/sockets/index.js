@@ -7,16 +7,15 @@ module.exports = function (io) {
 		console.log('a user connected ' + socket.id);
 
 		socket.on('connect message', function(msg){
-			console.log('user connected: ' + msg.username);
+			console.log('user connected: ' + msg.username + ', ' + msg.id);
 
 			// When a client is connected, add the client to the users list,
 			if(users[msg.id] == null) {
-				console.log("Is null");
+				console.log("Adding user to the list...");
 				users[msg.id] = socket.id;
 			}
 			else {
-				console.log("Is not null");
-				//io.to(socket.id).emit('chat message', 'You are already connected');
+				console.log("User is already in the list.");
 			}
 
 		});
@@ -67,9 +66,10 @@ module.exports = function (io) {
 		});
 
 		socket.on('disconnect', function(){
-			console.log('user disconnected' + socket.id);
+			console.log('user disconnected ' + socket.id);
 			for(var i in users){
 				if(users[i] == socket.id) {
+					console.log('Removing user from the list of connected users...');
 					delete users[i];
 					break;
 				}
