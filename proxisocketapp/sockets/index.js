@@ -58,24 +58,20 @@ module.exports = function (io) {
 			}
 			else {
 				console.log('Recipient is connected.');
-			}
 
-
-
-			if(msg.type == 'f2fInit') {
+				if(msg.type == 'f2fInit') {
 				console.log('Emitting message: ' + msg.type );
 				io.emit('face2face', msg);
+				}
+				else if(msg.type == 'f2fStart') {
+					console.log('Emitting message: ' + msg.type );
+					io.emit('face2face', msg);
+				}
+				else if(msg.type == 'f2fEnd') {
+					console.log('Emitting message: ' + msg.type );
+					io.emit('face2face', msg);
+				}
 			}
-			else if(msg.type == 'f2fStart') {
-				console.log('Emitting message: ' + msg.type );
-				io.emit('face2face', msg);
-			}
-			else if(msg.type == 'f2fEnd') {
-				console.log('Emitting message: ' + msg.type );
-				io.emit('face2face', msg);
-			}
-
-			
 		});
 
 		socket.on('from server', function(msg){
