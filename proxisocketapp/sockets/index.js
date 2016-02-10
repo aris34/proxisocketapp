@@ -44,6 +44,7 @@ module.exports = function (io) {
 
 		socket.on('face2face', function(msg){
 			console.log('face2face type: ' + msg.type );
+			console.log('face2face type: ' + msg.recipient );
 
 			// Check if the target user is in the list of connected users
 			if(users[msg.recipient] == null) {
