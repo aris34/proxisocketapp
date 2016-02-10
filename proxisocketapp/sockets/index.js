@@ -13,7 +13,6 @@ module.exports = function (io) {
 			if(users[msg.id] == null) {
 				console.log("Adding user to the list...");
 				users[msg.id] = socket.id;
-				io.emit('ping', msg.username + ' connected.');
 			}
 			else {
 				console.log("User is already in the list.");
@@ -46,6 +45,17 @@ module.exports = function (io) {
 		socket.on('face2face', function(msg){
 			console.log('face2face type: ' + msg.type );
 
+			// Check if the target user is in the list of connected users
+			if(users[msg.recipient] == null) {
+				console.log('Recipient is not connected...');
+				io.emit('face2face', "offline");
+			}
+			else {
+				console.log('Recipient is connected.');
+			}
+
+
+
 			if(msg.type == 'f2fInit') {
 				console.log('Emitting message: ' + msg.type );
 				io.emit('face2face', msg);
@@ -69,6 +79,7 @@ module.exports = function (io) {
 		socket.on('disconnect', function(){
 			console.log('user disconnected ' + socket.id);
 			for(var i in users){
+				console.log('user' + i ': ' + users[i]);
 				if(users[i] == socket.id) {
 					console.log('Removing user from the list of connected users...');
 					delete users[i];
