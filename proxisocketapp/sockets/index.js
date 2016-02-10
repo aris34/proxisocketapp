@@ -13,6 +13,7 @@ module.exports = function (io) {
 			if(users[msg.id] == null) {
 				console.log("Adding user to the list...");
 				users[msg.id] = socket.id;
+				io.emit('ping', msg.username + ' connected.');
 			}
 			else {
 				console.log("User is already in the list.");
