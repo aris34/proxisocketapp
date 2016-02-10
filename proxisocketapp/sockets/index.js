@@ -79,7 +79,7 @@ module.exports = function (io) {
 		socket.on('disconnect', function(){
 			console.log('user disconnected ' + socket.id);
 			for(var i in users){
-				console.log('user' + i ': ' + users[i]);
+				console.log('user' + i + ': ' + users[i]);
 				if(users[i] == socket.id) {
 					console.log('Removing user from the list of connected users...');
 					delete users[i];
