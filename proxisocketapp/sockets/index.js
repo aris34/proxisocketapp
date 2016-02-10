@@ -6,15 +6,20 @@ module.exports = function (io) {
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
 
-		// When a client is connected, add the client to the users list,
-		// if(users[msg] == null) {
-		// 	console.log("Is null");
-		// 	users[msg] = socket.id;
-		// }
-		// else {
-		// 	console.log("Is not null");
-		// 	io.to(socket.id).emit('chat message', 'You are already connected');
-		// }
+		socket.on('connect message', function(msg){
+			console.log('user connected: ' + msg.username);
+
+			// When a client is connected, add the client to the users list,
+			if(users[msg.id] == null) {
+				console.log("Is null");
+				users[msg.id] = socket.id;
+			}
+			else {
+				console.log("Is not null");
+				//io.to(socket.id).emit('chat message', 'You are already connected');
+			}
+
+		});
 
 		socket.on('chat message', function(msg){
 			//console.log('chat message: ' + msg.sender);
