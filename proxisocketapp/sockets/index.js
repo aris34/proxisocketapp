@@ -2,12 +2,11 @@ module.exports = function (io) {
 
 	var request = require('request');
 	var users = {};
-	io.set('heartbeat interval', 5);
-	//io.set('heartbeat timeout', 10);
+	io.pingInterval = 2000;
+	io.pingTimeout = 5000;
 
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
-		//socket.heartbeatTimeout = 5000;
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + msg.username + ', ' + msg.id + ' - ' + Date.now());
