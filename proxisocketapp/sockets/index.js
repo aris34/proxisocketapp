@@ -54,7 +54,7 @@ module.exports = function (io) {
 			// Check if the target user is in the list of connected users
 			if(users[msg.recipient] == null) {
 				console.log('Recipient is not connected...');
-				//io.emit('face2face', "offline");
+				io.emit('userOffline', "offline");
 			}
 			else {
 				console.log('Recipient is connected.');
