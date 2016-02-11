@@ -5,6 +5,7 @@ module.exports = function (io) {
 
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
+		socket.heartbeatTimeout = 5000;
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + msg.username + ', ' + msg.id + ' - ' + Date.now());
