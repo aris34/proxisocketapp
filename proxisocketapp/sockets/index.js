@@ -4,6 +4,8 @@ module.exports = function (io) {
 	var users = {};
 	//io.pingInterval = 2000;
 	//io.pingTimeout = 5000;
+	console.log('inside function');
+
 
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
