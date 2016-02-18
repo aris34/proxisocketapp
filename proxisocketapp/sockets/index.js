@@ -32,7 +32,9 @@ module.exports = function (io) {
 		socket.on('chat message', function(msg){
 			//console.log('chat message: ' + msg.sender);
 			console.log('message: ' + msg );
-			io.emit('chat message', msg);		
+			io.emit('chat message', msg);	
+
+			io.emit('new chat message', msg);	
 
 			// if(msg === 'add user') {
 
@@ -85,12 +87,16 @@ module.exports = function (io) {
 		socket.on('disconnect', function(){
 			console.log('user disconnected ' + socket.id + ' - ' + Date.now());
 			for(var i in users){
-				console.log('user ' + i + ': ' + users[i]);
 				if(users[i] == socket.id) {
 					console.log('Removing user from the list of connected users...');
 					delete users[i];
 					break;
 				}
+			}
+
+			// Show the list of connected users in the console
+			for(var i in users){
+				console.log('user ' + i + ': ' + users[i]);
 			}
 		});
 	});
