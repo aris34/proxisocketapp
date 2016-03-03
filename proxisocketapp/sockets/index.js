@@ -17,25 +17,25 @@ module.exports = function (io) {
 	var users = {};
 
 	// Get the profiles stored in the database and add them to the list
-	request({url: serverURL, json: true}, function(err, res, json) {
-		    if (err) {
-		        throw err;
-		    }
-		    else {
-		    	//console.log(json);
-		    	for(var i in json) {
-		    		//console.log('In for: ' + json[i]._id);
-		    		var user = json[i];
+	// request({url: serverURL, json: true}, function(err, res, json) {
+	// 	    if (err) {
+	// 	        throw err;
+	// 	    }
+	// 	    else {
+	// 	    	//console.log(json);
+	// 	    	for(var i in json) {
+	// 	    		//console.log('In for: ' + json[i]._id);
+	// 	    		var user = json[i];
 
-		    		// Create a new profile object for every profile on the server
-		    		// and add it to the list of users
-		    		tempProfile = new Profile(user._id, user.username, user.active);
-		    		console.log("tempProfile: " + tempProfile.id + ', ' + tempProfile.username);
-		    		users[tempProfile.id] = tempProfile;
-		    	}
-			}
-			console.log("Users0: " + users);
-		});
+	// 	    		// Create a new profile object for every profile on the server
+	// 	    		// and add it to the list of users
+	// 	    		tempProfile = new Profile(user._id, user.username, user.active);
+	// 	    		console.log("tempProfile: " + tempProfile.id + ', ' + tempProfile.username);
+	// 	    		users[tempProfile.id] = tempProfile;
+	// 	    	}
+	// 		}
+	// 	});
+	users = getUsers();
 
 	// Whenever a device connects to the socket
 	io.on('connection', function(socket){
@@ -147,4 +147,24 @@ module.exports = function (io) {
 			}
 		});
 	});
+
+	function getUsers() {
+		var tempUsers = {};
+
+		request({url: serverURL, json: true}, function(err, res, json) {
+		    if (err)
+		        throw err;
+		    else {
+		    	for(var i in json) {
+		    		// Create a new profile object for every profile on the server
+		    		// and add it to the list of users
+		    		tempProfile = new Profile(user._id, user.username, user.active);
+		    		tempUsers[tempProfile.id] = tempProfile;
+		    	}
+			}
+		});
+		return tempUsers;
+	}
+
+
 }
