@@ -1,8 +1,8 @@
 module.exports = function (io) { 
 
 	var request = require('request');
+	var client = require( 'socket.io-client' );
 	var users = {};
-	console.log('inside function');
 
 	// request({url: 'http://localhost:10000/profiles', json: true}, function(err, res, json) {
 	//     if (err) {
