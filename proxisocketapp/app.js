@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var socketClient = require('./node_modules/socket.io/node_modules/socket.io-client')
+//var socketClient = require('./node_modules/socket.io/node_modules/socket.io-client')
 // var socket_io    = require( "socket.io" );
 
 var routes = require('./routes/index');
@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(socketClient());
+//app.use(socketClient());
 
 app.use('/', routes);
 
