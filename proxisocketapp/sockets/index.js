@@ -6,6 +6,12 @@ module.exports = function (io) {
 	//io.pingTimeout = 5000;
 	console.log('inside function');
 
+	request({url: 'http://localhost:3000/profiles', json: true}, function(err, res, json) {
+	    if (err) {
+	        throw err;
+	    }
+	    console.log(json);
+	});
 
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
