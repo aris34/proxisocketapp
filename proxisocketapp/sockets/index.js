@@ -16,39 +16,18 @@ module.exports = function (io) {
 	}
 	var users = {};
 
-	// Get the profiles stored in the database and add them to the list
-	// request({url: serverURL, json: true}, function(err, res, json) {
-	// 	    if (err) {
-	// 	        throw err;
-	// 	    }
-	// 	    else {
-	// 	    	//console.log(json);
-	// 	    	for(var i in json) {
-	// 	    		//console.log('In for: ' + json[i]._id);
-	// 	    		var user = json[i];
-
-	// 	    		// Create a new profile object for every profile on the server
-	// 	    		// and add it to the list of users
-	// 	    		tempProfile = new Profile(user._id, user.username, user.active);
-	// 	    		console.log("tempProfile: " + tempProfile.id + ', ' + tempProfile.username);
-	// 	    		users[tempProfile.id] = tempProfile;
-	// 	    	}
-	// 		}
-	// 	});
+	// Get the list of profiles from the database
 	users = getUsers();
 
 	// Whenever a device connects to the socket
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
 
-		// Print the list of users
-		for(var i in users) {
-			console.log("User: " + users[i].id + " - " + users[i].username + " - " + users[i].active);
-		}
+		// Re-load the list of profiles from the database
+		users = getUsers();
 
 		socket.on('connect message', function(msg){
-			console.log('user connected: ' + msg.username + ', ' + msg.id);
-			//console.log('user connected: ' + msg.username + ', ' + msg.id + ' - ' + Date.now());
+			console.log('user connected: ' + msg.toSource());
 
 			// When a client is connected, add the client to the users list,
 			if(users[msg.id] == null) {
