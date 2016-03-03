@@ -81,7 +81,7 @@ module.exports = function (io) {
 		});
 
 		socket.on('likeNotification', function(msg){
-			console.log('likeNotification from: ' + msg.senderId " to: " 
+			console.log('likeNotification from: ' + msg.senderId + " to: " 
 				+ msg.recipientId);
 
 			// Check if the target user is in the list of connected users
