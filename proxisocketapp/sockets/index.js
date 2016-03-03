@@ -22,13 +22,15 @@ module.exports = function (io) {
 		        throw err;
 		    }
 		    else {
-		    	console.log(json);
+		    	//console.log(json);
 		    	for(var i in json) {
-		    		console.log('In for: ' + json[i]._id);
+		    		//console.log('In for: ' + json[i]._id);
+		    		var user = json[i];
+
 		    		// Create a new profile object for every profile on the server
 		    		// and add it to the list of users
-		    		//tempProfile = new Profile(user._id, user.username, user.active);
-		    		//users[tempProfile.id] = tempProfile;
+		    		tempProfile = new Profile(user._id, user.username, user.active);
+		    		users[tempProfile.id] = tempProfile;
 		    	}
 			}
 		});
