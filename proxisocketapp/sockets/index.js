@@ -30,6 +30,7 @@ module.exports = function (io) {
 		    		// Create a new profile object for every profile on the server
 		    		// and add it to the list of users
 		    		tempProfile = new Profile(user._id, user.username, user.active);
+		    		console.log("tempProfile: " + tempProfile.id + ', ' + tempProfile.username);
 		    		users[tempProfile.id] = tempProfile;
 		    	}
 			}
