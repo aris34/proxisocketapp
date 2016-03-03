@@ -2,16 +2,14 @@ module.exports = function (io) {
 
 	var request = require('request');
 	var users = {};
-	//io.pingInterval = 2000;
-	//io.pingTimeout = 5000;
 	console.log('inside function');
 
-	request({url: 'http://localhost:10000/profiles', json: true}, function(err, res, json) {
-	    if (err) {
-	        throw err;
-	    }
-	    console.log(json);
-	});
+	// request({url: 'http://localhost:10000/profiles', json: true}, function(err, res, json) {
+	//     if (err) {
+	//         throw err;
+	//     }
+	//     console.log(json);
+	// });
 
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
