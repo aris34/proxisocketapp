@@ -48,11 +48,10 @@ module.exports = function (io) {
 		// });	
 
 		// Print the list of users
-		var i=1;
-		for(user in users) {
-			console.log("User: " + i + user.id + " - " + user.username + " - " + user.active);
-			i++;
-		}
+		// for(var i in users) {
+		// 	console.log("User: " + users[i].id + " - " + users[i].username + " - " + users[i].active);
+		// }
+		console.log('Users: ' + users);
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + msg.username + ', ' + msg.id);
