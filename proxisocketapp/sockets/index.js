@@ -33,6 +33,7 @@ module.exports = function (io) {
 		    		users[tempProfile.id] = tempProfile;
 		    	}
 			}
+			console.log("Users0: " + users);
 		});
 
 	// Whenever a device connects to the socket
