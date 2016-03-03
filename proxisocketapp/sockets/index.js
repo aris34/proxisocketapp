@@ -27,7 +27,7 @@ module.exports = function (io) {
 		users = getUsers();
 
 		socket.on('connect message', function(msg){
-			console.log('user connected: ' + msg.toSource());
+			console.log('user connected: ' + JSON.stringify(msg));
 
 			// When a client is connected, add the client to the users list,
 			if(users[msg.id] == null) {
