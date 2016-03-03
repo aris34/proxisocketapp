@@ -2,20 +2,54 @@ module.exports = function (io) {
 
 	var request = require('request');
 	var client = require( 'socket.io-client' );
+	// socket = client.connect('localhost', {
+ 	//    	port: 3000
+	// });
+
+	var serverURL = 'http://social.cs.tut.fi:10001/profiles';
+	
+	// Create a list of profiles to verify  of connected users
+	function Profile(id, username, active) {
+		this.id = id;
+		this.username = username;
+		this.active = active;
+	}
 	var users = {};
 
-	socket = client.connect('localhost', {
-    	port: 3000
-	});
-	request({url: 'http://social.cs.tut.fi:10001/profiles', json: true}, function(err, res, json) {
-	    if (err) {
-	        throw err;
-	    }
-	    console.log(json);
-	});
+	// Get the profiles stored in the database and add them to the list
+	request({url: serverURL, json: true}, function(err, res, json) {
+		    if (err) {
+		        throw err;
+		    }
+		    else {
+		    	console.log(json);
+		    	for(user in json) {
+		    		// Create a new profile object for every profile on the server
+		    		// and add it to the list of users
+		    		tempProfile = new Profile(user._id, user.username, user.active);
+		    		users[tempProfile.id] = tempProfile;
+		    	}
+			}
+		});
 
+	// Whenever a device connects to the socket
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
+
+		// Get the list of active profiles from the database
+		// request({url: 'http://social.cs.tut.fi:10001/profiles', json: true}, function(err, res, json) {
+		//     if (err) {
+		//         throw err;
+		//     }
+		//     console.log(json);
+		// });	
+
+		// Print the list of users
+		var i=1;
+		for(user in users) {
+			console.log("User: " + i + user.id + " - " + user.username + " - " + user.active);
+			i++;
+		}
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + msg.username + ', ' + msg.id);
