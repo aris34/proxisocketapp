@@ -7,12 +7,12 @@ module.exports = function (io) {
 	socket = client.connect('localhost', {
     	port: 3000
 	});
-	// request({url: 'http://localhost:10000/profiles', json: true}, function(err, res, json) {
-	//     if (err) {
-	//         throw err;
-	//     }
-	//     console.log(json);
-	// });
+	request({url: 'http://localhost:3000/profiles', json: true}, function(err, res, json) {
+	    if (err) {
+	        throw err;
+	    }
+	    console.log(json);
+	});
 
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
