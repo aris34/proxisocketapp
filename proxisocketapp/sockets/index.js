@@ -7,7 +7,7 @@ module.exports = function (io) {
 	socket = client.connect('localhost', {
     	port: 3000
 	});
-	request({url: 'http://localhost:3000/profiles', json: true}, function(err, res, json) {
+	request({url: 'http://social.cs.tut.fi:10001/profiles', json: true}, function(err, res, json) {
 	    if (err) {
 	        throw err;
 	    }
