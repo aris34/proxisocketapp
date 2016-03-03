@@ -6,7 +6,7 @@ module.exports = function (io) {
 	//io.pingTimeout = 5000;
 	console.log('inside function');
 
-	request({url: 'http://localhost:3000/profiles', json: true}, function(err, res, json) {
+	request({url: 'http://localhost:10000/profiles', json: true}, function(err, res, json) {
 	    if (err) {
 	        throw err;
 	    }
