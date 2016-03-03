@@ -158,6 +158,7 @@ module.exports = function (io) {
 		    	for(var i in json) {
 		    		// Create a new profile object for every profile on the server
 		    		// and add it to the list of users
+		    		user = json[i];
 		    		tempProfile = new Profile(user._id, user.username, user.active);
 		    		tempUsers[tempProfile.id] = tempProfile;
 		    	}
