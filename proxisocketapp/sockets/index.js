@@ -9,10 +9,11 @@ module.exports = function (io) {
 	var serverURL = 'http://social.cs.tut.fi:10001/profiles';
 	
 	// Create a list of profiles to verify  of connected users
-	function Profile(id, username, active) {
+	function User(id, username, active) {
 		this.id = id;
 		this.username = username;
 		this.active = active;
+		this.connected = false;
 	}
 	var users = {};
 
@@ -28,6 +29,7 @@ module.exports = function (io) {
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + JSON.stringify(msg));
+			console.log('List of users:' + JSON.stringify(users));
 
 			// When a client is connected, add the client to the users list,
 			if(users[msg.id] == null) {
@@ -138,7 +140,7 @@ module.exports = function (io) {
 		    		// Create a new profile object for every profile on the server
 		    		// and add it to the list of users
 		    		user = json[i];
-		    		tempProfile = new Profile(user._id, user.username, user.active);
+		    		tempProfile = new User(user._id, user.username, user.active);
 		    		tempUsers[tempProfile.id] = tempProfile;
 		    	}
 			}
