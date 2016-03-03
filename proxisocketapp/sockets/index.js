@@ -41,19 +41,10 @@ module.exports = function (io) {
 	io.on('connection', function(socket){
 		console.log('a user connected ' + socket.id);
 
-		// Get the list of active profiles from the database
-		// request({url: 'http://social.cs.tut.fi:10001/profiles', json: true}, function(err, res, json) {
-		//     if (err) {
-		//         throw err;
-		//     }
-		//     console.log(json);
-		// });	
-
 		// Print the list of users
-		// for(var i in users) {
-		// 	console.log("User: " + users[i].id + " - " + users[i].username + " - " + users[i].active);
-		// }
-		console.log('Users: ' + users);
+		for(var i in users) {
+			console.log("User: " + users[i].id + " - " + users[i].username + " - " + users[i].active);
+		}
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + msg.username + ', ' + msg.id);
