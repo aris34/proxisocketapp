@@ -11,7 +11,8 @@ module.exports = function (io) {
 		console.log('a user connected ' + socket.id);
 
 		socket.on('connect message', function(msg){
-			console.log('user connected: ' + msg.username + ', ' + msg.id + ' - ' + Date.now());
+			console.log('user connected: ' + msg.username + ', ' + msg.id);
+			//console.log('user connected: ' + msg.username + ', ' + msg.id + ' - ' + Date.now());
 
 			// When a client is connected, add the client to the users list,
 			if(users[msg.id] == null) {
@@ -46,11 +47,6 @@ module.exports = function (io) {
 			//     });
 			// }
 
-			// for (var i in users) {
-			// 	console.log("user " + msg +": " + users[i]);
-			// }
-			//console.log(users);
-			// if(users.size > 0)
 		});
 
 		socket.on('face2face', function(msg){
@@ -82,6 +78,21 @@ module.exports = function (io) {
 
 		socket.on('from server', function(msg){
 			console.log('from server: ' + msg);
+		});
+
+		socket.on('likeNotification', function(msg){
+			console.log('likeNotification from: ' + msg.senderId " to: " 
+				+ msg.recipientId);
+
+			// Check if the target user is in the list of connected users
+			if(users[msg.recipient] == null) {
+				console.log('Recipient is not connected...');
+				//io.emit('userOffline', "offline");
+			}
+			else {
+				io.emit('chatNotification', msg);
+			}
+
 		});
 
 		socket.on('disconnect', function(){
