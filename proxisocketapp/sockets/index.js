@@ -4,6 +4,9 @@ module.exports = function (io) {
 	var client = require( 'socket.io-client' );
 	var users = {};
 
+	socket = client.connect('localhost', {
+    	port: 3000
+	});
 	// request({url: 'http://localhost:10000/profiles', json: true}, function(err, res, json) {
 	//     if (err) {
 	//         throw err;
