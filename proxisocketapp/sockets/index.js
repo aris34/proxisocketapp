@@ -23,8 +23,8 @@ module.exports = function (io) {
 		    }
 		    else {
 		    	console.log(json);
-		    	for(user in json) {
-		    		console.log('In for: ' + user._id);
+		    	for(var i in json) {
+		    		console.log('In for: ' + json[i]._id);
 		    		// Create a new profile object for every profile on the server
 		    		// and add it to the list of users
 		    		tempProfile = new Profile(user._id, user.username, user.active);
