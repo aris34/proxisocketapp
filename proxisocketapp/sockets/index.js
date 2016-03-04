@@ -28,11 +28,13 @@ module.exports = function (io) {
 		// Re-load the list of profiles from the database
 		//users = getUsers();
 		getUsers();
-		console.log('After getUsers() ' + users.length);
 		
+		console.log('Users: ');
 		for(var i in users) {
-			console.log('user: ' + JSON.stringify(users[i]));
+			console.log(users[i].username + ', active: ' + users[i].active 
+				+ ', active: ' + users[i].connected);
 		}
+		console.log('\n');
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + JSON.stringify(msg));
@@ -50,6 +52,12 @@ module.exports = function (io) {
 			else
 				console.log('User is not in the database');
 
+			console.log('Users: ');
+			for(var i in users) {
+				console.log(users[i].username + ', active: ' + users[i].active 
+					+ ', active: ' + users[i].connected);
+			}
+			console.log('\n');
 		});
 
 		socket.on('chat message', function(msg){
@@ -124,9 +132,12 @@ module.exports = function (io) {
 			}
 
 			// Show the list of connected users in the console
-			for(var i in users){
-				console.log('user: ' + users[i].username + ' - ' + users[i].connected);
+			console.log('Users: ');
+			for(var i in users) {
+				console.log(users[i].username + ', active: ' + users[i].active 
+					+ ', active: ' + users[i].connected);
 			}
+			console.log('\n');
 		});
 	});
 
