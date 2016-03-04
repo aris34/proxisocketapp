@@ -14,6 +14,7 @@ module.exports = function (io) {
 		this.username = username;
 		this.active = active;
 		this.connected = false;
+		this.socketId = "";
 	}
 	var users = {};
 
@@ -33,6 +34,7 @@ module.exports = function (io) {
 			if(users[msg.id] != null) {
 				if(users[msg.id].active == 'true') {
 					users[msg.id].connected = true;
+					users[msh.id].socketId = socket.id;
 				}
 				else {
 					users[msg.id].connected = false;
@@ -111,7 +113,7 @@ module.exports = function (io) {
 		socket.on('disconnect', function(){
 			console.log('on disconnect ' + socket.id);
 			for(var i in users){
-				if(users[i].id == socket.id) {
+				if(users[i].socketId == socket.id) {
 					console.log('Removing user ' + users[i].username 
 						+ 'from the list of connected users...');
 				 	users[i].connected = false;
