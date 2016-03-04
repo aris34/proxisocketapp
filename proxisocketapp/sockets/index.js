@@ -51,15 +51,15 @@ module.exports = function (io) {
 					// Check for unread messages
 					var sender = "";
 					for(var i in users[msg.id].messages) {
-						console.log('Unread message: ' + 
-							users[msg.id].messages[i].text);
+						console.log('Unread message: ' + users[msg.id].messages[i].text);
+						
 						if(sender != users[msg.id].messages[i].senderUsername) {
+
 							sender = users[msg.id].messages[i].senderUsername;
 							io.emit('chat message', users[msg.id].messages[i]);
 							io.emit('new chat message', users[msg.id].messages[i]);
-							users[msg.id].messages.splice(i, 1);
 						}
-
+						users[msg.id].messages.splice(i, 1);
 					}	
 
 				}
@@ -86,6 +86,7 @@ module.exports = function (io) {
 			// If the recipient of the message is not connected,
 			// add the message to their user structure
 			if(users[msg.recipientId].connected == false) {
+				console.log('Pushing message ' + msg.text);
 				users[msg.recipientId].messages.push(msg);
 			}
 
