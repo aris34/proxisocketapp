@@ -22,42 +22,31 @@ module.exports = function (io) {
 
 	// Whenever a device connects to the socket
 	io.on('connection', function(socket){
-		console.log('a user connected ' + socket.id);
 
 		// Re-load the list of profiles from the database
 		users = getUsers();
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + JSON.stringify(msg));
-			console.log('List of users:' + JSON.stringify(users));
 
 			// Check if connecting user is on the list
 			if(users[msg.id] != null) {
-				console.log('User is on the list');
-			}	
+				if(users[msg.id].active == 'true') {
+					users[msg.id].connected = true;
+				}
+				else {
+					users[msg.id].connected = false;
+				}
+			}
 			else
-				console.log('User is NOT on the list');
-
-			// When a client is connected, add the client to the users list,
-			// if(users[msg.id] == null) {
-			// 	console.log("Adding user to the list...");
-			// 	users[msg.id] = socket.id;
-			// }
-			// else {
-			// 	console.log("User is already in the list.");
-			// }
-
-			// // Show the list of connected users in the console
-			// for(var i in users){
-			// 	console.log('user ' + i + ': ' + users[i]);
-			// }
+				console.log('User is not on the database');
 
 		});
 
 		socket.on('chat message', function(msg){
 			//console.log('chat message: ' + msg.sender);
 			console.log('message: ' + msg );
-			io.emit('chat message', msg);	
+			io.emit('chat message', JSON.stringify(msg));	
 
 			io.emit('new chat message', msg);	
 
