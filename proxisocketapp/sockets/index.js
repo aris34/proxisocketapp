@@ -27,7 +27,7 @@ module.exports = function (io) {
 		users = getUsers();
 
 		socket.on('connect message', function(msg){
-			console.log('user connected: ' + JSON.stringify(msg));
+			console.log('user connected: ' + msg.username);
 
 			// Check if connecting user is on the list
 			if(users[msg.id] != null) {
@@ -135,10 +135,12 @@ module.exports = function (io) {
 		    else {
 		    	for(var i in json) {
 		    		// Create a new profile object for every profile on the server
-		    		// and add it to the list of users
-		    		user = json[i];
-		    		tempProfile = new User(user._id, user.username, user.active);
-		    		tempUsers[tempProfile.id] = tempProfile;
+		    		// and add it to the list of users, if it is active
+		    		if(json[i].active == "true") {
+			    		user = json[i];
+			    		tempProfile = new User(user._id, user.username, user.active);
+			    		tempUsers[tempProfile.id] = tempProfile;
+		    		}
 		    	}
 			}
 		});
