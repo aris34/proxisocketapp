@@ -26,7 +26,7 @@ module.exports = function (io) {
 
 		// Re-load the list of profiles from the database
 		users = getUsers();
-		console.log('After getUsers() ' + users.size());
+		console.log('After getUsers() ' + users.length());
 		for(var i in users) {
 			console.log('user: ' + JSON.stringify(users[i]));
 		}
