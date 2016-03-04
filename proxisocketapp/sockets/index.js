@@ -32,7 +32,7 @@ module.exports = function (io) {
 		console.log('Users: ');
 		for(var i in users) {
 			console.log(users[i].username + ', active: ' + users[i].active 
-				+ ', active: ' + users[i].connected);
+				+ ', connected: ' + users[i].connected);
 		}
 		console.log('\n');
 
