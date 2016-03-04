@@ -34,7 +34,7 @@ module.exports = function (io) {
 			if(users[msg.id] != null) {
 				if(users[msg.id].active == 'true') {
 					users[msg.id].connected = true;
-					users[msh.id].socketId = socket.id;
+					users[msg.id].socketId = socket.id;
 				}
 				else {
 					users[msg.id].connected = false;
