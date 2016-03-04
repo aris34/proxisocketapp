@@ -39,14 +39,14 @@ module.exports = function (io) {
 				}
 			}
 			else
-				console.log('User is not on the database');
+				console.log('User is not in the database');
 
 		});
 
 		socket.on('chat message', function(msg){
 			//console.log('chat message: ' + msg.sender);
-			console.log('message: ' + msg );
-			io.emit('chat message', JSON.stringify(msg));	
+			console.log('message: ' + JSON.stringify(msg) );
+			io.emit('chat message', msg);	
 
 			io.emit('new chat message', msg);	
 
