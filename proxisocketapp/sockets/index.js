@@ -128,6 +128,7 @@ module.exports = function (io) {
 	});
 
 	function getUsers() {
+		console.log('getUsers()');
 		var tempUsers = {};
 
 		request({url: serverURL, json: true}, function(err, res, json) {
