@@ -19,14 +19,17 @@ module.exports = function (io) {
 	var users = {};
 
 	// Get the list of profiles from the database
-	users = getUsers();
+	//users = getUsers();
+	getUsers();
 
 	// Whenever a device connects to the socket
 	io.on('connection', function(socket){
 
 		// Re-load the list of profiles from the database
-		users = getUsers();
+		//users = getUsers();
+		getUsers();
 		console.log('After getUsers() ' + users.length);
+		
 		for(var i in users) {
 			console.log('user: ' + JSON.stringify(users[i]));
 		}
@@ -114,7 +117,7 @@ module.exports = function (io) {
 			for(var i in users){
 				if(users[i].socketId == socket.id) {
 					console.log('Removing user ' + users[i].username 
-						+ 'from the list of connected users...');
+						+ ' from the list of connected users...');
 				 	users[i].connected = false;
 					break;
 				}
@@ -129,7 +132,7 @@ module.exports = function (io) {
 
 	function getUsers() {
 		console.log('getUsers()');
-		var tempUsers = {};
+		//var tempUsers = {};
 
 		request({url: serverURL, json: true}, function(err, res, json) {
 		    if (err)
@@ -141,12 +144,12 @@ module.exports = function (io) {
 		    		if(json[i].active == "true") {
 			    		user = json[i];
 			    		tempProfile = new User(user._id, user.username, user.active);
-			    		tempUsers[tempProfile.id] = tempProfile;
+			    		users[tempProfile.id] = tempProfile;
 		    		}
 		    	}
 			}
 		});
-		return tempUsers;
+		//return tempUsers;
 	}
 
 
