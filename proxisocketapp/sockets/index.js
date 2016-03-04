@@ -15,6 +15,7 @@ module.exports = function (io) {
 		this.active = active;
 		this.connected = false;
 		this.socketId = "";
+		this.messages = [];
 	}
 	var users = {};
 
@@ -46,6 +47,13 @@ module.exports = function (io) {
 						+ ' to connected - true, with socketId: ' + socket.id);
 					users[msg.id].connected = true;
 					users[msg.id].socketId = socket.id;
+
+					// Check for unread messages
+					for(var i in users[msg.id].messages) {
+						console.log('Unread message: ' + 
+							users[msg.id].messages[i].text);
+					}	
+
 				}
 				else {
 					console.log('Setting user with id: ' + msg.id + ' to connected - false');
@@ -66,7 +74,14 @@ module.exports = function (io) {
 		socket.on('chat message', function(msg){
 			//console.log('chat message: ' + msg.sender);
 			console.log('message: ' + JSON.stringify(msg) );
-			io.emit('chat message', msg);	
+
+			// If the recipient of the message is not connected,
+			// add the message to their user structure
+			if(users[msg.recipientId].connected == false) {
+				users[msg.recipientId].messages.push(msg);
+			}
+
+			io.emit('chat message', msg);
 
 			io.emit('new chat message', msg);
 		});
@@ -161,7 +176,8 @@ module.exports = function (io) {
 
 			    		// If the current profile is not in the list, add it
 			    		if(users[tempProfile.id] == null) {
-			    			console.log('Adding user in the list')
+			    			console.log('Adding user ' + tempProfile.username 
+			    				+'in the list')
 			    			users[tempProfile.id] = tempProfile;
 			    		}
 			    		// If it's already in the list, update the active field
