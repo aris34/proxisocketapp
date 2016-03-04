@@ -42,10 +42,12 @@ module.exports = function (io) {
 			// Check if connecting user is on the list
 			if(users[msg.id] != null) {
 				if(users[msg.id].active == 'true') {
+					console.log('Setting user with id: ' + msg.id + ' to connected - true');
 					users[msg.id].connected = true;
 					users[msg.id].socketId = socket.id;
 				}
 				else {
+					console.log('Setting user with id: ' + msg.id + ' to connected - false');
 					users[msg.id].connected = false;
 				}
 			}
@@ -55,7 +57,7 @@ module.exports = function (io) {
 			console.log('Users: ');
 			for(var i in users) {
 				console.log(users[i].username + ', active: ' + users[i].active 
-					+ ', active: ' + users[i].connected);
+					+ ', connected: ' + users[i].connected);
 			}
 			console.log('\n');
 		});
@@ -135,7 +137,7 @@ module.exports = function (io) {
 			console.log('Users: ');
 			for(var i in users) {
 				console.log(users[i].username + ', active: ' + users[i].active 
-					+ ', active: ' + users[i].connected);
+					+ ', connected: ' + users[i].connected);
 			}
 			console.log('\n');
 		});
