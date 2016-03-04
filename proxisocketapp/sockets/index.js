@@ -20,9 +20,6 @@ module.exports = function (io) {
 
 	// Get the list of profiles from the database
 	users = getUsers();
-	for(var i in users) {
-		console.log('user: ' + JSON.stringify(users[i]));
-	}
 
 	// Whenever a device connects to the socket
 	io.on('connection', function(socket){
@@ -30,6 +27,9 @@ module.exports = function (io) {
 		// Re-load the list of profiles from the database
 		users = getUsers();
 		console.log('After getUsers()');
+		for(var i in users) {
+			console.log('user: ' + JSON.stringify(users[i]));
+		}
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + JSON.stringify(msg));
