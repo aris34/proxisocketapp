@@ -49,9 +49,16 @@ module.exports = function (io) {
 					users[msg.id].socketId = socket.id;
 
 					// Check for unread messages
+					var sender = "";
 					for(var i in users[msg.id].messages) {
 						console.log('Unread message: ' + 
 							users[msg.id].messages[i].text);
+						if(sender != users[msg.id].messages[i].senderUsername) {
+							sender = users[msg.id].messages[i].senderUsername;
+							io.emit('chat message', msg);
+							io.emit('new chat message', msg);
+						}
+
 					}	
 
 				}
