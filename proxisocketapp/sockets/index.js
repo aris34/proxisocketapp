@@ -20,9 +20,9 @@ module.exports = function (io) {
 
 	// Get the list of profiles from the database
 	users = getUsers();
-	for(var i in users){
-				console.log('user: ' + JSON.stringify(users[i]));
-			}
+	for(var i in users) {
+		console.log('user: ' + JSON.stringify(users[i]));
+	}
 
 	// Whenever a device connects to the socket
 	io.on('connection', function(socket){
@@ -32,7 +32,7 @@ module.exports = function (io) {
 		console.log('After getUsers()');
 
 		socket.on('connect message', function(msg){
-			console.log('user connected: ' + msg.username);
+			console.log('user connected: ' + JSON.stringify(msg));
 
 			// Check if connecting user is on the list
 			if(users[msg.id] != null) {
@@ -139,7 +139,6 @@ module.exports = function (io) {
 		    		// and add it to the list of users, if it is active
 		    		if(json[i].active == "true") {
 			    		user = json[i];
-			    		console.log('Adding user with active: ' + user.active);
 			    		tempProfile = new User(user._id, user.username, user.active);
 			    		tempUsers[tempProfile.id] = tempProfile;
 		    		}
