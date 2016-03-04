@@ -137,7 +137,7 @@ module.exports = function (io) {
 				+ msg.recipientId);
 
 			// Check if the target user is in the list of connected users
-			if(users[msg.recipient] == null) {
+			if(users[msg.recipientId].connected == false) {
 				console.log('Recipient is not connected...');
 				//io.emit('userOffline', "offline");
 			}
