@@ -42,7 +42,8 @@ module.exports = function (io) {
 			// Check if connecting user is on the list
 			if(users[msg.id] != null) {
 				if(users[msg.id].active == 'true') {
-					console.log('Setting user with id: ' + msg.id + ' to connected - true');
+					console.log('Setting user with id: ' + msg.id 
+						+ ' to connected - true, with socketId: ' + socket.id);
 					users[msg.id].connected = true;
 					users[msg.id].socketId = socket.id;
 				}
@@ -134,7 +135,7 @@ module.exports = function (io) {
 			}
 
 			// Show the list of connected users in the console
-			console.log('Users: ');
+			console.log('Users after disconnect: ');
 			for(var i in users) {
 				console.log(users[i].username + ', active: ' + users[i].active 
 					+ ', connected: ' + users[i].connected);
