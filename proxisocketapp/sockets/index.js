@@ -142,7 +142,7 @@ module.exports = function (io) {
 				//io.emit('userOffline', "offline");
 			}
 			else {
-				io.emit('chatNotification', msg);
+				io.emit('likeNotification', msg);
 			}
 
 		});
