@@ -57,6 +57,7 @@ module.exports = function (io) {
 							sender = users[msg.id].messages[i].senderUsername;
 							io.emit('chat message', users[msg.id].messages[i]);
 							io.emit('new chat message', users[msg.id].messages[i]);
+							users[msg.id].messages.splice(i, 1);
 						}
 
 					}	
