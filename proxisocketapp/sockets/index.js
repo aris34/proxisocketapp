@@ -158,7 +158,16 @@ module.exports = function (io) {
 		    		if(json[i].active == "true") {
 			    		user = json[i];
 			    		tempProfile = new User(user._id, user.username, user.active);
-			    		users[tempProfile.id] = tempProfile;
+
+			    		// If the current profile is not in the list, add it
+			    		if(users[tempProfile.id] == null) {
+			    			console.log('Adding user in the list')
+			    			users[tempProfile.id] = tempProfile;
+			    		}
+			    		// If it's already in the list, update the active field
+			    		else {
+			    			users[tempProfile.id].active = tempProfile.active;
+			    		}
 		    		}
 		    	}
 			}
