@@ -50,18 +50,7 @@ module.exports = function (io) {
 			console.log('message: ' + JSON.stringify(msg) );
 			io.emit('chat message', msg);	
 
-			io.emit('new chat message', msg);	
-
-			// if(msg === 'add user') {
-
-			//     request({url: 'http://localhost:3000/profiles', json: true}, function(err, res, json) {
-			//         if (err) {
-			//             throw err;
-			//         }
-			//         console.log(json);
-			//     });
-			// }
-
+			io.emit('new chat message', msg);
 		});
 
 		socket.on('face2face', function(msg){
@@ -69,24 +58,30 @@ module.exports = function (io) {
 			console.log('face2face recipient: ' + msg.recipient );
 
 			// Check if the target user is in the list of connected users
-			if(users[msg.recipient] == null) {
-				console.log('Recipient is not connected...');
+			if(users[msg.recipient] == null){
+				console.log('Recipient is not connected...(1)');
 				io.emit('userOffline', "offline");
 			}
 			else {
-				console.log('Recipient is connected.');
+				if(users[msg.recipient].connected == false) {
+					console.log('Recipient is not connected...(2)');
+				io.emit('userOffline', "offline");
+				}
+				else {
+					console.log('Recipient is connected.');
 
-				if(msg.type == 'f2fInit') {
-				console.log('Emitting message: ' + msg.type );
-				io.emit('face2face', msg);
-				}
-				else if(msg.type == 'f2fStart') {
+					if(msg.type == 'f2fInit') {
 					console.log('Emitting message: ' + msg.type );
 					io.emit('face2face', msg);
-				}
-				else if(msg.type == 'f2fEnd') {
-					console.log('Emitting message: ' + msg.type );
-					io.emit('face2face', msg);
+					}
+					else if(msg.type == 'f2fStart') {
+						console.log('Emitting message: ' + msg.type );
+						io.emit('face2face', msg);
+					}
+					else if(msg.type == 'f2fEnd') {
+						console.log('Emitting message: ' + msg.type );
+						io.emit('face2face', msg);
+					}
 				}
 			}
 		});
