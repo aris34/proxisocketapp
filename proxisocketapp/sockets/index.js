@@ -1,13 +1,26 @@
 module.exports = function (io) { 
 
-	var request = require('request');
+	//var request = require('request');
 	var client = require( 'socket.io-client' );
 	// socket = client.connect('localhost', {
  	//    	port: 3000
 	// });
 
 	var serverURL = 'http://social.cs.tut.fi:10001/profiles';
-	
+	//var serverURL = 'http://192.168.1.2:3000/profiles';
+
+	// var request = require('request'),
+ //    username = "admin",
+ //    password = "cosmo",
+ //    url = "http://192.168.1.2:3000/profiles",
+ //    auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
+
+ 	var request = require('request'),
+    username = "admin",
+    password = "cosmo",
+    url = "http://social.cs.tut.fi:10001/profiles",
+    auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
+
 	// Create a list of profiles to verify  of connected users
 	function User(id, username, active) {
 		this.id = id;
@@ -29,13 +42,6 @@ module.exports = function (io) {
 		// Re-load the list of profiles from the database
 		//users = getUsers();
 		getUsers();
-		
-		console.log('Users: ');
-		for(var i in users) {
-			console.log(users[i].username + ', active: ' + users[i].active 
-				+ ', connected: ' + users[i].connected);
-		}
-		console.log('\n');
 
 		socket.on('connect message', function(msg){
 			console.log('user connected: ' + JSON.stringify(msg));
@@ -172,7 +178,9 @@ module.exports = function (io) {
 		console.log('getUsers()');
 		//var tempUsers = {};
 
-		request({url: serverURL, json: true}, function(err, res, json) {
+		request({url: url, headers : {
+            		"Authorization" : auth
+        			}, json: true,}, function(err, res, json) {
 		    if (err)
 		        throw err;
 		    else {
