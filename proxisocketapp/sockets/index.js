@@ -50,8 +50,8 @@ module.exports = function (io) {
 			// Check if connecting user is on the list
 			if(users[msg.id] != null) {
 				if(users[msg.id].active == 'true') {
-					console.log('Setting user with id: ' + msg.id 
-						+ ' to connected - true, with socketId: ' + socket.id);
+					// console.log('Setting user with id: ' + msg.id 
+					// 	+ ' to connected - true, with socketId: ' + socket.id);
 					users[msg.id].connected = true;
 					users[msg.id].socketId = socket.id;
 
@@ -71,7 +71,7 @@ module.exports = function (io) {
 
 				}
 				else {
-					console.log('Setting user with id: ' + msg.id + ' to connected - false');
+					//console.log('Setting user with id: ' + msg.id + ' to connected - false');
 					users[msg.id].connected = false;
 				}
 			}
@@ -177,7 +177,7 @@ module.exports = function (io) {
 	});
 
 	function getUsers() {
-		console.log('getUsers()');
+		//console.log('getUsers()');
 		//var tempUsers = {};
 
 		request({url: url, headers : {
