@@ -175,10 +175,10 @@ module.exports = function (io) {
 			// console.log('\n');
 		});
 
-		socket.on('ping', function(msg)) {
+		socket.on('ping', function(msg) {
 			console.log('Received ping from: ' + msg.id);
 			io.emit('ping', msg);
-		}
+		});
 	});
 
 	function getUsers() {
