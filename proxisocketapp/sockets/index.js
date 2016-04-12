@@ -6,7 +6,7 @@ module.exports = function (io) {
  	//    	port: 3000
 	// });
 
-	var serverURL = 'http://social.cs.tut.fi:10001/profiles';
+	//var serverURL = 'http://social.cs.tut.fi:10001/profiles';
 	//var serverURL = 'http://192.168.1.2:3000/profiles';
 
 	// var request = require('request'),
@@ -19,6 +19,7 @@ module.exports = function (io) {
     username = "admin",
     password = "cosmo",
     url = "http://social.cs.tut.fi:10001/profiles",
+    //url = "http://192.168.1.2:3000/profiles",
     auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
 
 	// Create a list of profiles to verify  of connected users
@@ -77,12 +78,13 @@ module.exports = function (io) {
 			else
 				console.log('User is not in the database');
 
-			console.log('Users: ');
-			for(var i in users) {
-				console.log(users[i].username + ', active: ' + users[i].active 
-					+ ', connected: ' + users[i].connected);
-			}
-			console.log('\n');
+			// console.log('Users: ');
+			// for(var i in users) {
+			// 	if(users[i].connected == true)
+			// 	console.log(users[i].username + ', active: ' + users[i].active 
+			// 		+ ', connected: ' + users[i].connected);
+			// }
+			// console.log('\n');
 		});
 
 		socket.on('chat message', function(msg){
@@ -165,12 +167,12 @@ module.exports = function (io) {
 			}
 
 			// Show the list of connected users in the console
-			console.log('Users after disconnect: ');
-			for(var i in users) {
-				console.log(users[i].username + ', active: ' + users[i].active 
-					+ ', connected: ' + users[i].connected);
-			}
-			console.log('\n');
+			// console.log('Users after disconnect: ');
+			// for(var i in users) {
+			// 	console.log(users[i].username + ', active: ' + users[i].active 
+			// 		+ ', connected: ' + users[i].connected);
+			// }
+			// console.log('\n');
 		});
 	});
 
@@ -193,8 +195,8 @@ module.exports = function (io) {
 
 			    		// If the current profile is not in the list, add it
 			    		if(users[tempProfile.id] == null) {
-			    			console.log('Adding user ' + tempProfile.username 
-			    				+'in the list')
+			    			console.log('Adding ' + tempProfile.username + ' - ' +
+			    				tempProfile.id +' in the list')
 			    			users[tempProfile.id] = tempProfile;
 			    		}
 			    		// If it's already in the list, update the active field
