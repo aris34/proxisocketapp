@@ -71,7 +71,7 @@ module.exports = function (io) {
 
 				}
 				else {
-					//console.log('Setting user with id: ' + msg.id + ' to connected - false');
+					console.log('Setting user with id: ' + msg.id + ' to connected - false');
 					users[msg.id].connected = false;
 				}
 			}
@@ -156,7 +156,7 @@ module.exports = function (io) {
 		});
 
 		socket.on('disconnect', function(){
-			console.log('on disconnect ' + socket.id);
+			//console.log('on disconnect ' + socket.id);
 			for(var i in users){
 				if(users[i].socketId == socket.id) {
 					console.log('Removing user ' + users[i].username 
@@ -174,6 +174,11 @@ module.exports = function (io) {
 			// }
 			// console.log('\n');
 		});
+
+		socket.on('ping', function(msg)) {
+			console.log('Received ping from: ' + msg.id);
+			io.emit('ping', msg);
+		}
 	});
 
 	function getUsers() {
